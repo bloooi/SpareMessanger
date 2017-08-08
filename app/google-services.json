@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "603894662001",
+    "firebase_url": "https://spare-messanger.firebaseio.com",
+    "project_id": "spare-messanger",
+    "storage_bucket": "spare-messenger.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:603894662001:android:2f4346d814936449",
+        "android_client_info": {
+          "package_name": "jay.messenger.spare"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "603894662001-s8kmof99kbhkm487d0tnutbb3rn0fc2t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "jay.messenger.spare",
+            "certificate_hash": "a6ee57e35c1662770ce6a2bbc8728dc30f3e64b2"
+          }
+        },
+        {
+          "client_id": "603894662001-pcetlo4anc319vhvh9t04a2tam1ago53.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAkM5tKQwOjHOwfZ-jWkdqVXy6zSHzef9M"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "603894662001-pcetlo4anc319vhvh9t04a2tam1ago53.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

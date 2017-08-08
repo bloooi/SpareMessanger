@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="8dp"
+    tools:context="jay.messenger.spare.MessageActivity">
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/message_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0"
+
+        android:layout_above="@+id/text_field"
+        />
+    <RelativeLayout
+        android:id="@+id/text_field"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <EditText
+            android:id="@+id/message_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:layout_marginRight="8dp"
+
+            android:layout_toStartOf="@+id/send_btn" />
+        <Button
+            android:id="@+id/send_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="전송"
+
+            android:layout_alignBaseline="@+id/message_text"
+            android:layout_alignBottom="@+id/message_text"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+</RelativeLayout>
