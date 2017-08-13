@@ -1,6 +1,7 @@
 package jay.messenger.spare;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by leejaebeom on 2017. 8. 9..
@@ -9,19 +10,15 @@ import java.util.ArrayList;
 public class User {
     public String name;
     public String phone;
-    public ArrayList<Conversations> conversations;
+    public HashMap<String, String> chatRooms;
 
     public User() {
     }
 
-    public User(String name, String phone, ArrayList<Conversations> conversations) {
+    public User(String name, String phone, HashMap <String, String> chatRooms) {
         this.name = name;
         this.phone = phone;
-        this.conversations = conversations;
+        this.chatRooms = chatRooms;
     }
 
-    class Conversations{
-        private String hash;
-        private String talker;
-    }
 }
