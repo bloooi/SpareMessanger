@@ -40,4 +40,19 @@ public class SharedPreference {
         editor.putStringSet(key,value);
         editor.commit();
     }
+
+    public static int getData(Context context, String prefKey, String key, int defaultValue){
+        preferences = context.getSharedPreferences(prefKey, Context.MODE_PRIVATE);
+        return preferences.getInt(key,defaultValue);
+    }
+
+    public static String getData(Context context, String prefKey, String key, String defaultValue){
+        preferences = context.getSharedPreferences(prefKey, Context.MODE_PRIVATE);
+        return preferences.getString(key,defaultValue);
+    }
+
+    public static boolean getData(Context context, String prefKey, String key, boolean defaultValue){
+        preferences = context.getSharedPreferences(prefKey, Context.MODE_PRIVATE);
+        return preferences.getBoolean(key,defaultValue);
+    }
 }

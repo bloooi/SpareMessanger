@@ -59,7 +59,7 @@ public class LoginActivity extends AppCompatActivity {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         User user = dataSnapshot.getValue(User.class);
                         user.phone = dataSnapshot.getKey();
-                        if (user.name != name.getText().toString()){
+                        if (!user.name.equals(name.getText().toString())){
                             databaseReference.child("Users").child(phone.getText().toString()).removeValue();
                             user = null;
                         }
