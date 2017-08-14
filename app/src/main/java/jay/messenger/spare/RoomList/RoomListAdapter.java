@@ -21,10 +21,12 @@ public class RoomListAdapter extends FirebaseRecyclerAdapter<RoomListModel,RoomL
 
     @Override
     protected void populateViewHolder(final RoomListViewHolder viewHolder, final RoomListModel model, int position) {
-        if (UserInfo.getPhone().equals(model.Users.user1Phone)){
-            viewHolder.name.setText(model.Users.user2Name);
-        }else {
-            viewHolder.name.setText(model.Users.user2Name);
+        if (model != null){
+            if (UserInfo.getPhone().equals(model.Users.user1Phone)){
+                viewHolder.name.setText(model.Users.user2Name);
+            }else {
+                viewHolder.name.setText(model.Users.user2Name);
+            }
         }
 
     }

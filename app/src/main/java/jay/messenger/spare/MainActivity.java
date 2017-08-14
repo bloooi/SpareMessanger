@@ -24,8 +24,6 @@ import jay.messenger.spare.util.SharedPreference;
 import jay.messenger.spare.util.Values;
 
 public class MainActivity extends AppCompatActivity {
-
-    TextView temp;
     RecyclerView roomList;
     DatabaseReference roomListReference;
     DatabaseReference roomReference;
@@ -37,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        temp = (TextView)findViewById(R.id.temp_text);
         roomList = (RecyclerView)findViewById(R.id.main_room_list);
 
         roomList.setLayoutManager(new LinearLayoutManager(this));
@@ -46,11 +43,10 @@ public class MainActivity extends AppCompatActivity {
         if (!UserInfo.isLogin()){
             startActivity(new Intent(this, LoginActivity.class));
             finish();
-        }else{
+        }else {
             UserInfo.setName(SharedPreference.getData(this, Values.PREF_USER_KEY, Values.PREF_USER_NAME_KEY, ""));
             UserInfo.setPhone(SharedPreference.getData(this, Values.PREF_USER_KEY, Values.PREF_USER_PHONE_KEY, ""));
         }
-//        temp.setText(UserInfo.getName() + " " + UserInfo.getPhone());
 
         roomListReference = FirebaseDatabase.getInstance().getReference();
         roomReference = roomListReference.child(Values.CHILD_ROOMS);
@@ -69,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
                 Users users = new Users(UserInfo.getName(), "김도윤",UserInfo.getPhone(), "+821058559208", 2);
                 RoomListModel model = new RoomListModel(users);
 
-                String idKey = roomListReference.child("Rooms").push().getKey();
+                String idKey = roomListReference.child(Values.CHILD_ROOMS).push().getKey();
                 roomListReference.child(Values.CHILD_ROOMS).child(idKey).setValue(model);
                 roomListReference.child(Values.CHILD_USERS).child(UserInfo.getPhone()).child(Values.CHILD_CHATROOMS).child(idKey).setValue("+821058559208");
             }

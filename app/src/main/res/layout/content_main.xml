@@ -9,12 +9,6 @@
     tools:context="jay.messenger.spare.MainActivity"
     tools:showIn="@layout/activity_main">
 
-    <TextView
-        android:id="@+id/temp_text"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        />
     <android.support.v7.widget.RecyclerView
         android:id="@+id/main_room_list"
         android:layout_width="match_parent"

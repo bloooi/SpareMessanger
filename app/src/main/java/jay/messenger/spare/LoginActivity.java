@@ -58,14 +58,16 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         User user = dataSnapshot.getValue(User.class);
-                        user.phone = dataSnapshot.getKey();
-                        if (!user.name.equals(name.getText().toString())){
-                            databaseReference.child("Users").child(phone.getText().toString()).removeValue();
-                            user = null;
+                        if (user != null){
+                            user.phone = dataSnapshot.getKey();
+                            if (!user.name.equals(name.getText().toString())){
+                                databaseReference.child("Users").child(phone.getText().toString()).removeValue();
+                                user = null;
+                            }
                         }
 
                         if (user == null){
-                            databaseReference.child("Users").child(phone.getText().toString()).child("name").setValue("김도윤");   //데이터 생성
+                            databaseReference.child("Users").child(phone.getText().toString()).child("name").setValue(name.getText().toString());   //데이터 생성
                             UserInfo.setName(name.getText().toString());
                             UserInfo.setPhone(phone.getText().toString());
                             UserInfo.setChatRooms(null);
