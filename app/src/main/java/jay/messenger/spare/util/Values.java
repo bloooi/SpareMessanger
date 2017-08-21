@@ -16,7 +16,13 @@ public abstract class Values {
     public static final String CHILD_USERS = "Users";
     public static final String CHILD_CHATROOMS= "chatRooms";
     public static final String CHILD_ROOMS= "Rooms";
-    public static final String CHILD_CHAT= "chat";
+    public static final String CHILD_CHAT= "Chat";
     public static final String CHILD_NAME= "name";
     public static final String CHILD_ROOM_INFO= "info";
+
+    //Service Country
+    public static final String[] SERVICE_COUNTRY_CODE = {"+82"};
+
+    //Result Code
+    public static final int CREATE_ROOM_CODE = 1001;
 }

@@ -1,5 +1,6 @@
 package jay.messenger.spare;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,15 +12,26 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-public class MessageActivity extends AppCompatActivity {
+import java.util.Calendar;
+import java.util.Date;
+
+import jay.messenger.spare.RoomList.Chat;
+import jay.messenger.spare.util.DateFormat;
+
+import static jay.messenger.spare.util.Values.*;
+
+public class ChatActivity extends AppCompatActivity {
     public static class MessageViewHolder extends RecyclerView.ViewHolder {
 
         TextView messageTextView;
         TextView messengerTextView;
-        TextView timestempTextView;
+        TextView timestampTextView;
 //        ImageView messageImageView;
 
 
@@ -27,14 +39,10 @@ public class MessageActivity extends AppCompatActivity {
             super(v);
             messageTextView = (TextView) itemView.findViewById(R.id.message_text);
             messengerTextView = (TextView) itemView.findViewById(R.id.messenger_text);
-            timestempTextView = (TextView) itemView.findViewById(R.id.timestemp_text);
+            timestampTextView = (TextView) itemView.findViewById(R.id.timestemp_text);
 //            messageImageView = (ImageView) itemView.findViewById(R.id.messageImageView);
         }
     }
-
-    //상수
-    public static final String NODE_MESSAGES = "messages";
-    public static final String NODE_PHONE = "+821031329208";
     //UI init
     Button sendBtn;
     EditText messageText;
@@ -46,13 +54,14 @@ public class MessageActivity extends AppCompatActivity {
 
     //Firebase init
     private DatabaseReference mFirebaseDatabaseReference;
-    private FirebaseRecyclerAdapter<Message, MessageViewHolder> mFirebaseAdapter;
+    private FirebaseRecyclerAdapter<Chat, MessageViewHolder> mFirebaseAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message);
-
+        Intent intent = getIntent();
+        final String IDKey = intent.getStringExtra("IDKey");
         sendBtn = (Button)findViewById(R.id.send_btn);
         messageText = (EditText) findViewById(R.id.message_text);
         mProgressBar = (ProgressBar)findViewById(R.id.progressBar);
@@ -63,32 +72,31 @@ public class MessageActivity extends AppCompatActivity {
         mMessageRecyclerView.setLayoutManager(mLinearLayoutManager);
 
         mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
+        mFirebaseDatabaseReference = mFirebaseDatabaseReference.child(CHILD_ROOMS).child(IDKey).child(CHILD_CHAT);
 
+        final Date timeStampDate = Calendar.getInstance().getTime();
         sendBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Message message = new Message(messageText.getText().toString(), "2017.08.08 00:00:00", "이재범", "01031329208");
-                mFirebaseDatabaseReference.child(NODE_MESSAGES)
-                        .push().setValue(message);
+                Chat chat = new Chat(messageText.getText().toString(), DateFormat.getTimeStampFormat(timeStampDate), UserInfo.getName());
+                mFirebaseDatabaseReference.push().setValue(chat);
                 messageText.setText("");
-
-
             }
         });
 
 
-        mFirebaseAdapter = new FirebaseRecyclerAdapter<Message, MessageViewHolder>(
-                Message.class,
+        mFirebaseAdapter = new FirebaseRecyclerAdapter<Chat, MessageViewHolder>(
+                Chat.class,
                 R.layout.item_message,
                 MessageViewHolder.class,
-                mFirebaseDatabaseReference.child(NODE_MESSAGES)) {
+                mFirebaseDatabaseReference) {
             @Override
-            protected void populateViewHolder(MessageViewHolder viewHolder, Message model, int position) {
+            protected void populateViewHolder(MessageViewHolder viewHolder, Chat model, int position) {
                 mProgressBar.setVisibility(View.INVISIBLE);
 
-                viewHolder.messageTextView.setText(model.getMessage());
+                viewHolder.messageTextView.setText(model.getText());
                 viewHolder.messengerTextView.setText(model.getName());
-                viewHolder.timestempTextView.setText(model.getTimeStamp());
+                viewHolder.timestampTextView.setText(model.getTimeStamp());
             }
         };
 
@@ -108,8 +116,19 @@ public class MessageActivity extends AppCompatActivity {
             }
         });
 
+        mFirebaseDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                
+                mProgressBar.setVisibility(View.INVISIBLE);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
         mMessageRecyclerView.setLayoutManager(mLinearLayoutManager);
         mMessageRecyclerView.setAdapter(mFirebaseAdapter);
-
     }
 }

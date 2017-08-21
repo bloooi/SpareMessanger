@@ -3,6 +3,7 @@
     package="jay.messenger.spare">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <application
         android:allowBackup="true"
@@ -21,12 +22,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MessageActivity">
-
-        </activity>
-        <activity android:name=".LoginActivity">
-
-        </activity>
+        <activity android:name=".ChatActivity"></activity>
+        <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".Contact.ContactListActivity"></activity>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="43ea382641189e952e4b71b8374ec7a3f000eb60" />
     </application>
 
 </manifest>

@@ -8,6 +8,16 @@ import java.io.Serializable;
 
 public class RoomListModel {
     Users Users;
+    private String Key;
+
+    public String getKey() {
+        return Key;
+    }
+
+    public void setKey(String key) {
+        Key = key;
+    }
+
 
     public RoomListModel() {
     }

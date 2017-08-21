@@ -6,11 +6,11 @@ import java.io.Serializable;
  * Created by leejaebeom on 2017. 8. 14..
  */
 public class Users implements Serializable {
-    String user1Name;
-    String user2Name;
-    String user1Phone;
-    String user2Phone;
-    int usersCount;
+    public String user1Name;
+    public String user2Name;
+    public String user1Phone;
+    public String user2Phone;
+    public int usersCount;
 
     public Users() {
     }
